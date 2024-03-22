@@ -1,0 +1,719 @@
+definitions:
+  dtos.CreateUserRequest:
+    properties:
+      confirmPassword:
+        minLength: 5
+        type: string
+      email:
+        type: string
+      name:
+        type: string
+      password:
+        minLength: 5
+        type: string
+      username:
+        type: string
+    required:
+    - confirmPassword
+    - email
+    - name
+    - password
+    - username
+    type: object
+  dtos.ForgetPasswordRequest:
+    properties:
+      username:
+        type: string
+    type: object
+  dtos.KaryawanRequest:
+    properties:
+      id:
+        type: string
+    required:
+    - id
+    type: object
+  dtos.LoginRequest:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  dtos.RekeningKaryawan:
+    properties:
+      id:
+        type: string
+    required:
+    - id
+    type: object
+  dtos.SaveDetailKaryawan:
+    properties:
+      nik:
+        type: string
+      npwp:
+        type: string
+    type: object
+  dtos.SaveKaryawanRequest:
+    properties:
+      alamat:
+        type: string
+      detailKaryawan:
+        $ref: '#/definitions/dtos.SaveDetailKaryawan'
+      dob:
+        type: string
+      nama:
+        type: string
+      status:
+        type: string
+    type: object
+  dtos.SaveKaryawanTrainingRequest:
+    properties:
+      karyawan:
+        $ref: '#/definitions/dtos.KaryawanRequest'
+      tanggal:
+        type: string
+      training:
+        $ref: '#/definitions/dtos.TrainingRequest'
+    type: object
+  dtos.SaveRekeningKaryawan:
+    properties:
+      id:
+        type: string
+    required:
+    - id
+    type: object
+  dtos.SaveRekeningRequest:
+    properties:
+      jenis:
+        type: string
+      karyawan:
+        $ref: '#/definitions/dtos.SaveRekeningKaryawan'
+      nama:
+        type: string
+      rekening:
+        type: string
+    type: object
+  dtos.SaveTrainingRequest:
+    properties:
+      pengajar:
+        type: string
+      tema:
+        type: string
+    type: object
+  dtos.TrainingRequest:
+    properties:
+      id:
+        type: string
+    required:
+    - id
+    type: object
+  dtos.UpdateDetailKaryawan:
+    properties:
+      id:
+        type: string
+      nik:
+        type: string
+      npwp:
+        type: string
+    required:
+    - id
+    type: object
+  dtos.UpdateKaryawanRequest:
+    properties:
+      alamat:
+        type: string
+      detailKaryawan:
+        $ref: '#/definitions/dtos.UpdateDetailKaryawan'
+      dob:
+        type: string
+      id:
+        type: string
+      nama:
+        type: string
+      status:
+        type: string
+    required:
+    - id
+    type: object
+  dtos.UpdateKaryawanTrainingRequest:
+    properties:
+      id:
+        type: integer
+      karyawan:
+        $ref: '#/definitions/dtos.KaryawanRequest'
+      tanggal:
+        type: string
+      training:
+        $ref: '#/definitions/dtos.TrainingRequest'
+    required:
+    - id
+    type: object
+  dtos.UpdateRekeningRequest:
+    properties:
+      alamat:
+        type: string
+      id:
+        type: string
+      jenis:
+        type: string
+      karyawan:
+        $ref: '#/definitions/dtos.RekeningKaryawan'
+      nama:
+        type: string
+      rekening:
+        type: string
+    required:
+    - id
+    type: object
+  dtos.UpdateTrainingRequest:
+    properties:
+      id:
+        type: string
+      pengajar:
+        type: string
+      tema:
+        type: string
+    required:
+    - id
+    type: object
+  dtos.UserResetPasswordRequest:
+    properties:
+      confirmNewPassword:
+        type: string
+      email:
+        type: string
+      newPassword:
+        type: string
+      otp:
+        type: string
+    type: object
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+paths:
+  /forget-password/change-password:
+    post:
+      consumes:
+      - application/json
+      description: Forget Password User Account
+      parameters:
+      - description: User
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.UserResetPasswordRequest'
+      produces:
+      - application/json
+      responses: {}
+      summary: Post User Data
+      tags:
+      - User
+  /forget-password/send:
+    post:
+      consumes:
+      - application/json
+      description: Forget Password User Account
+      parameters:
+      - description: User
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.ForgetPasswordRequest'
+      produces:
+      - application/json
+      responses: {}
+      summary: Post User Data
+      tags:
+      - User
+  /karyawan:
+    post:
+      consumes:
+      - application/json
+      description: Add new Karyawan
+      parameters:
+      - description: Karyawan
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.SaveKaryawanRequest'
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Post Karyawan Data
+      tags:
+      - Karyawan
+    put:
+      consumes:
+      - application/json
+      description: Update Karyawan
+      parameters:
+      - description: Karyawan
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.UpdateKaryawanRequest'
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Put Karyawan Data
+      tags:
+      - Karyawan
+  /karyawan/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Karyawan
+      parameters:
+      - description: Karyawan ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Delete Karyawan Data
+      tags:
+      - Karyawan
+    get:
+      consumes:
+      - application/json
+      description: Get Karyawan
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Get Karyawan Data
+      tags:
+      - Karyawan
+  /karyawan/list:
+    get:
+      consumes:
+      - application/json
+      description: Get All Karyawan
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Get All Karyawan Data
+      tags:
+      - Karyawan
+  /karyawanTraining:
+    post:
+      consumes:
+      - application/json
+      description: Add new KaryawanTraining
+      parameters:
+      - description: KaryawanTraining
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.SaveKaryawanTrainingRequest'
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Post KaryawanTraining Data
+      tags:
+      - KaryawanTraining
+    put:
+      consumes:
+      - application/json
+      description: Update KaryawanTraining
+      parameters:
+      - description: KaryawanTraining
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.UpdateKaryawanTrainingRequest'
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Put KaryawanTraining Data
+      tags:
+      - KaryawanTraining
+  /karyawanTraining/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete KaryawanTraining
+      parameters:
+      - description: KaryawanTraining ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Delete KaryawanTraining Data
+      tags:
+      - KaryawanTraining
+    get:
+      consumes:
+      - application/json
+      description: Get KaryawanTraining
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Get KaryawanTraining Data
+      tags:
+      - KaryawanTraining
+  /karyawanTraining/list:
+    get:
+      consumes:
+      - application/json
+      description: Get All KaryawanTraining
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Get All KaryawanTraining Data
+      tags:
+      - KaryawanTraining
+  /rekening:
+    post:
+      consumes:
+      - application/json
+      description: Add new Rekening
+      parameters:
+      - description: Rekening
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.SaveRekeningRequest'
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Post Rekening Data
+      tags:
+      - Rekening
+    put:
+      consumes:
+      - application/json
+      description: Update Rekening
+      parameters:
+      - description: Rekening
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.UpdateRekeningRequest'
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Put Rekening Data
+      tags:
+      - Rekening
+  /rekening/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Rekening
+      parameters:
+      - description: Rekening ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Delete Rekening Data
+      tags:
+      - Rekening
+    get:
+      consumes:
+      - application/json
+      description: Get Rekening
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Get Rekening Data
+      tags:
+      - Rekening
+  /rekening/list:
+    get:
+      consumes:
+      - application/json
+      description: Get All Rekening
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Get All Rekening Data
+      tags:
+      - Rekening
+  /showFile/{filename}:
+    get:
+      consumes:
+      - application/json
+      description: Show a file
+      parameters:
+      - description: filename
+        in: path
+        name: filename
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      summary: Show a file
+      tags:
+      - Files
+  /training:
+    post:
+      consumes:
+      - application/json
+      description: Add new Training
+      parameters:
+      - description: Training
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.SaveTrainingRequest'
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Post Training Data
+      tags:
+      - Training
+    put:
+      consumes:
+      - application/json
+      description: Update Training
+      parameters:
+      - description: Training
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.UpdateTrainingRequest'
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Put Training Data
+      tags:
+      - Training
+  /training/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Training
+      parameters:
+      - description: Training ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Delete Training Data
+      tags:
+      - Training
+    get:
+      consumes:
+      - application/json
+      description: Get Training
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Get Training Data
+      tags:
+      - Training
+  /training/list:
+    get:
+      consumes:
+      - application/json
+      description: Get All Training
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Get All Training Data
+      tags:
+      - Training
+  /upload:
+    post:
+      consumes:
+      - multipart/form-data
+      description: Uploads a file and saves it
+      parameters:
+      - description: File to upload
+        in: formData
+        name: file
+        required: true
+        type: file
+      produces:
+      - application/json
+      responses: {}
+      summary: Uploads a file
+      tags:
+      - Files
+  /user-login/login:
+    post:
+      consumes:
+      - application/json
+      description: Login Request Token for Authorization
+      parameters:
+      - description: body
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.LoginRequest'
+      produces:
+      - application/json
+      responses: {}
+      summary: Login Request Token user
+      tags:
+      - Authentication
+  /user-register:
+    post:
+      consumes:
+      - application/json
+      description: Register New User Account
+      parameters:
+      - description: User
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.CreateUserRequest'
+      produces:
+      - application/json
+      responses: {}
+      summary: Create New User
+      tags:
+      - User
+  /user-register/register-confirm-otp/{otp}:
+    post:
+      consumes:
+      - application/json
+      description: Approved User Account
+      parameters:
+      - description: otp
+        in: path
+        name: otp
+        type: string
+      - description: User
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.ForgetPasswordRequest'
+      produces:
+      - application/json
+      responses: {}
+      summary: Post User Data
+      tags:
+      - User
+  /user-register/send-otp:
+    post:
+      consumes:
+      - application/json
+      description: Send Otp Registration User Account
+      parameters:
+      - description: User
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.ForgetPasswordRequest'
+      produces:
+      - application/json
+      responses: {}
+      summary: Post User Data
+      tags:
+      - User
+  /user/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get User Account
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      security:
+      - ApiKeyAuth: []
+      summary: Get User Data
+      tags:
+      - User
+securityDefinitions:
+  ApiKeyAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"
