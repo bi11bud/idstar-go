@@ -1,0 +1,461 @@
+definitions:
+  dtos.KaryawanRequest:
+    properties:
+      id:
+        type: string
+    required:
+    - id
+    type: object
+  dtos.RekeningKaryawan:
+    properties:
+      id:
+        type: string
+    required:
+    - id
+    type: object
+  dtos.SaveDetailKaryawan:
+    properties:
+      nik:
+        type: string
+      npwp:
+        type: string
+    type: object
+  dtos.SaveKaryawanRequest:
+    properties:
+      alamat:
+        type: string
+      detailKaryawan:
+        $ref: '#/definitions/dtos.SaveDetailKaryawan'
+      dob:
+        type: string
+      nama:
+        type: string
+      status:
+        type: string
+    type: object
+  dtos.SaveKaryawanTrainingRequest:
+    properties:
+      karyawan:
+        $ref: '#/definitions/dtos.KaryawanRequest'
+      tanggal:
+        type: string
+      training:
+        $ref: '#/definitions/dtos.TrainingRequest'
+    type: object
+  dtos.SaveRekeningKaryawan:
+    properties:
+      id:
+        type: string
+    required:
+    - id
+    type: object
+  dtos.SaveRekeningRequest:
+    properties:
+      jenis:
+        type: string
+      karyawan:
+        $ref: '#/definitions/dtos.SaveRekeningKaryawan'
+      nama:
+        type: string
+      rekening:
+        type: string
+    type: object
+  dtos.SaveTrainingRequest:
+    properties:
+      pengajar:
+        type: string
+      tema:
+        type: string
+    type: object
+  dtos.TrainingRequest:
+    properties:
+      id:
+        type: string
+    required:
+    - id
+    type: object
+  dtos.UpdateDetailKaryawan:
+    properties:
+      id:
+        type: string
+      nik:
+        type: string
+      npwp:
+        type: string
+    required:
+    - id
+    type: object
+  dtos.UpdateKaryawanRequest:
+    properties:
+      alamat:
+        type: string
+      detailKaryawan:
+        $ref: '#/definitions/dtos.UpdateDetailKaryawan'
+      dob:
+        type: string
+      id:
+        type: string
+      nama:
+        type: string
+      status:
+        type: string
+    required:
+    - id
+    type: object
+  dtos.UpdateKaryawanTrainingRequest:
+    properties:
+      id:
+        type: integer
+      karyawan:
+        $ref: '#/definitions/dtos.KaryawanRequest'
+      tanggal:
+        type: string
+      training:
+        $ref: '#/definitions/dtos.TrainingRequest'
+    required:
+    - id
+    type: object
+  dtos.UpdateRekeningRequest:
+    properties:
+      alamat:
+        type: string
+      id:
+        type: string
+      jenis:
+        type: string
+      karyawan:
+        $ref: '#/definitions/dtos.RekeningKaryawan'
+      nama:
+        type: string
+      rekening:
+        type: string
+    required:
+    - id
+    type: object
+  dtos.UpdateTrainingRequest:
+    properties:
+      id:
+        type: string
+      pengajar:
+        type: string
+      tema:
+        type: string
+    required:
+    - id
+    type: object
+info:
+  contact: {}
+paths:
+  /karyawan:
+    post:
+      consumes:
+      - application/json
+      description: Add new Karyawan
+      parameters:
+      - description: Karyawan
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.SaveKaryawanRequest'
+      produces:
+      - application/json
+      responses: {}
+      summary: Post Karyawan Data
+      tags:
+      - Karyawan
+    put:
+      consumes:
+      - application/json
+      description: Update Karyawan
+      parameters:
+      - description: Karyawan
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.UpdateKaryawanRequest'
+      produces:
+      - application/json
+      responses: {}
+      summary: Put Karyawan Data
+      tags:
+      - Karyawan
+  /karyawan/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Karyawan
+      parameters:
+      - description: Karyawan ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      summary: Delete Karyawan Data
+      tags:
+      - Karyawan
+    get:
+      consumes:
+      - application/json
+      description: Get Karyawan
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      summary: Get Karyawan Data
+      tags:
+      - Karyawan
+  /karyawan/list:
+    get:
+      consumes:
+      - application/json
+      description: Get All Karyawan
+      produces:
+      - application/json
+      responses: {}
+      summary: Get All Karyawan Data
+      tags:
+      - Karyawan
+  /karyawanTraining:
+    post:
+      consumes:
+      - application/json
+      description: Add new KaryawanTraining
+      parameters:
+      - description: KaryawanTraining
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.SaveKaryawanTrainingRequest'
+      produces:
+      - application/json
+      responses: {}
+      summary: Post KaryawanTraining Data
+      tags:
+      - KaryawanTraining
+    put:
+      consumes:
+      - application/json
+      description: Update KaryawanTraining
+      parameters:
+      - description: KaryawanTraining
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.UpdateKaryawanTrainingRequest'
+      produces:
+      - application/json
+      responses: {}
+      summary: Put KaryawanTraining Data
+      tags:
+      - KaryawanTraining
+  /karyawanTraining/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete KaryawanTraining
+      parameters:
+      - description: KaryawanTraining ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      summary: Delete KaryawanTraining Data
+      tags:
+      - KaryawanTraining
+    get:
+      consumes:
+      - application/json
+      description: Get KaryawanTraining
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      summary: Get KaryawanTraining Data
+      tags:
+      - KaryawanTraining
+  /karyawanTraining/list:
+    get:
+      consumes:
+      - application/json
+      description: Get All KaryawanTraining
+      produces:
+      - application/json
+      responses: {}
+      summary: Get All KaryawanTraining Data
+      tags:
+      - KaryawanTraining
+  /rekening:
+    post:
+      consumes:
+      - application/json
+      description: Add new Rekening
+      parameters:
+      - description: Rekening
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.SaveRekeningRequest'
+      produces:
+      - application/json
+      responses: {}
+      summary: Post Rekening Data
+      tags:
+      - Rekening
+    put:
+      consumes:
+      - application/json
+      description: Update Rekening
+      parameters:
+      - description: Rekening
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.UpdateRekeningRequest'
+      produces:
+      - application/json
+      responses: {}
+      summary: Put Rekening Data
+      tags:
+      - Rekening
+  /rekening/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Rekening
+      parameters:
+      - description: Rekening ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      summary: Delete Rekening Data
+      tags:
+      - Rekening
+    get:
+      consumes:
+      - application/json
+      description: Get Rekening
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      summary: Get Rekening Data
+      tags:
+      - Rekening
+  /rekening/list:
+    get:
+      consumes:
+      - application/json
+      description: Get All Rekening
+      produces:
+      - application/json
+      responses: {}
+      summary: Get All Rekening Data
+      tags:
+      - Rekening
+  /training:
+    post:
+      consumes:
+      - application/json
+      description: Add new Training
+      parameters:
+      - description: Training
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.SaveTrainingRequest'
+      produces:
+      - application/json
+      responses: {}
+      summary: Post Training Data
+      tags:
+      - Training
+    put:
+      consumes:
+      - application/json
+      description: Update Training
+      parameters:
+      - description: Training
+        in: body
+        name: request
+        required: true
+        schema:
+          $ref: '#/definitions/dtos.UpdateTrainingRequest'
+      produces:
+      - application/json
+      responses: {}
+      summary: Put Training Data
+      tags:
+      - Training
+  /training/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Delete Training
+      parameters:
+      - description: Training ID
+        in: path
+        name: id
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      summary: Delete Training Data
+      tags:
+      - Training
+    get:
+      consumes:
+      - application/json
+      description: Get Training
+      parameters:
+      - description: ID
+        in: path
+        name: id
+        type: string
+      produces:
+      - application/json
+      responses: {}
+      summary: Get Training Data
+      tags:
+      - Training
+  /training/list:
+    get:
+      consumes:
+      - application/json
+      description: Get All Training
+      produces:
+      - application/json
+      responses: {}
+      summary: Get All Training Data
+      tags:
+      - Training
+swagger: "2.0"
